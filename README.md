@@ -21,6 +21,14 @@ Create a file in the root directory called .env, fill in the following:
 DATABASE_URL="..."
 ```
 
+### Set up the database
+
+After configuring your environment file and starting the database run
+
+```bash
+npx primsa migrate dev
+```
+
 ### Run the project
 
 ```bash
