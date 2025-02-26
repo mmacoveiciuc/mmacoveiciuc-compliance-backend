@@ -1,0 +1,10 @@
+[build]
+builder = "Nixpacks"
+command = "npm install && npm run build"
+
+[start]
+command = "npm run start"
+
+[service]
+name = "compliance-nodejs-backend"
+port = 8080

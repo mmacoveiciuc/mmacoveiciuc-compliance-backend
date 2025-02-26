@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String
+  org        String
+  name       String
+  email      String?
+  role       String
+  compliant  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+
+  @@id([id, org])
+}
+
+model Project {
+  id         String
+  org        String
+  name       String
+  region     String
+  compliant  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+
+  @@id([id, org])
+}
+
+model Table {
+  id         String
+  org        String
+  name       String
+  schema     String
+  compliant  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+
+  @@id([id, org])
+}
+
+model ComplianceLog {
+  id          Int      @id @default(autoincrement())
+  org         String
+  resource    String
+  previous    String
+  current     String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  @@index([org])
+  @@index([createdAt])
+}
